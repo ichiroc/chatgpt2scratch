@@ -91,10 +91,8 @@ class Scratch3ChatgptBlocks {
         const completionPromise = fetchWithTimeout('https:api.openai.com/v1/chat/completions', params, 10000)
             .then(response => response.json()
             ).then(json => {
-                console.log(json)
                 return (json.choices[0].message.content.replaceAll("\n", ''));
             }).catch(error => {
-                console.log(error);
                 log.warn(error);
                 return (`失敗しちゃったみたい。理由はこれだよ「${error}」`);
             });

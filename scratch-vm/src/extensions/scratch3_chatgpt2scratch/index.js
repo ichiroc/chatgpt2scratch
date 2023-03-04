@@ -19,6 +19,7 @@ const blockIconURI = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYA
  */
 class Scratch3ChatgptBlocks {
     apiKey = ''
+    maxTokens = 300
 
     constructor(runtime) {
         /**
@@ -53,6 +54,17 @@ class Scratch3ChatgptBlocks {
                     }
                 },
                 {
+                    opcode: 'setMaxTokens',
+                    blockType: BlockType.REPORTER,
+                    text: 'max tokens[NUMBER]',
+                    arguments: {
+                        NUMBER: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: 300
+                        }
+                    }
+                },
+                {
                     opcode: 'setApiKey',
                     blockType: BlockType.COMMAND,
                     text: 'APIキーをセット'
@@ -81,7 +93,7 @@ class Scratch3ChatgptBlocks {
                     { "role": "user", "content": question },
                 ],
                 temperature: 0,
-                max_tokens: 300,
+                max_tokens: this.maxTokens,
                 top_p: 1,
                 frequency_penalty: 0,
                 presence_penalty: 0,
@@ -102,6 +114,10 @@ class Scratch3ChatgptBlocks {
 
     setApiKey() {
         this.apiKey = window.prompt('OpenAI のAPIキーを入力してください');
+    }
+
+    setMaxTokens(args) {
+        this.maxTokens = Number(args.NUMBER);
     }
 }
 

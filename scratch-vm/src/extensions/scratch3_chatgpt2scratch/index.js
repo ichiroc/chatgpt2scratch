@@ -17,7 +17,7 @@ const blockIconURI = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYA
  * @param {Runtime} runtime - the runtime instantiating this block package.
  * @constructor
  */
-class Scratch3ChatgptBlocks {
+class Scratch3ChatGPTBlocks {
     apiKey = ''
     maxTokens = 300
 
@@ -121,4 +121,4 @@ class Scratch3ChatgptBlocks {
     }
 }
 
-module.exports = Scratch3ChatgptBlocks;
+module.exports = Scratch3ChatGPTBlocks;

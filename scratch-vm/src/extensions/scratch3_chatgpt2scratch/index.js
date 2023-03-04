@@ -43,9 +43,9 @@ class Scratch3ChatgptBlocks {
             blockIconURI: blockIconURI,
             blocks: [
                 {
-                    opcode: 'ask',
+                    opcode: 'answer',
                     blockType: BlockType.REPORTER,
-                    text: '[TEXT]の回答',
+                    text: '[TEXT]の答え',
                     arguments: {
                         TEXT: {
                             type: ArgumentType.STRING,
@@ -74,7 +74,7 @@ class Scratch3ChatgptBlocks {
             }
         };
     }
-    ask(args) {
+    answer(args) {
         if (this.apiKey === 'APIキー' || this.apiKey === '') {
             return 'openai.com のサイトからAPIキーを取得してセットください';
         }

@@ -1,4 +1,3 @@
-const { Configuration, OpenAIApi } = require('openai');
 const ArgumentType = require('../../extension-support/argument-type');
 const BlockType = require('../../extension-support/block-type');
 const Cast = require('../../util/cast');
@@ -34,8 +33,8 @@ class Scratch3ChatgptBlocks {
 
 
     /**
-* @returns {object} metadata for this extension and its blocks.
-*/
+    * @returns {object} metadata for this extension and its blocks.
+    */
     getInfo() {
         return {
             id: 'chatgpt2scratch',
@@ -69,7 +68,7 @@ class Scratch3ChatgptBlocks {
         }
         const question = Cast.toString(args.TEXT);
 
-        const completionPromise = fetch('https:api.openai.com/v1/chat/completions', {
+        const params = {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${this.apiKey}`,
@@ -88,14 +87,17 @@ class Scratch3ChatgptBlocks {
                 presence_penalty: 0,
 
             })
-        }).then(response => response.json()
-        ).then(json => {
-            console.log(json)
-            return (json.choices[0].message.content.replaceAll("\n", ''));
-        }).catch(error => {
-            console.log(error);
-            return (`失敗しちゃったみたい。理由はこれだよ「${error}」`);
-        });
+        }
+        const completionPromise = fetchWithTimeout('https:api.openai.com/v1/chat/completions', params, 10000)
+            .then(response => response.json()
+            ).then(json => {
+                console.log(json)
+                return (json.choices[0].message.content.replaceAll("\n", ''));
+            }).catch(error => {
+                console.log(error);
+                log.warn(error);
+                return (`失敗しちゃったみたい。理由はこれだよ「${error}」`);
+            });
 
         return completionPromise;
     }

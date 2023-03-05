@@ -1,0 +1,35 @@
+name: Deploy ChatGPT2Scratch
+
+on:
+  push:
+    branches: ["main"]
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          repository: LLK/scratch-gui
+          ref: develop
+      - run: npm install
+      - uses: actions/checkout@v3
+        with:
+          path: ./chatgpt2scratch
+      - run: sh ./chatgpt2scratch/install.sh
+      - run: NODE_OPTIONS=--openssl-legacy-provider npm run build
+      - name: npm install under chatgpt2scratch
+        run: npm install
+        working-directory: ./chatgpt2scratch
+      - name: Build chatgpt2scratch.mjs for xcratch
+        run: NODE_OPTIONS=--openssl-legacy-provider npm run build
+        working-directory: ./chatgpt2scratch
+      - name: Copy chatgpt2scratch.mjs to build folder
+        run: cp ./chatgpt2scratch/dist/chatgpt2scratch.mjs ./build
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./build

@@ -1,20 +1,20 @@
 {
-  "name": "gpt32scratch",
+  "name": "chatgpt2scratch",
   "version": "0.1.0",
   "description": "OpenAI GPT-3 for Scratch",
   "scripts": {
-    "build": "rimraf ./dist && mkdirp ./dist && npx xcratch-build --module=gpt32scratch --block=\"./scratch-vm/src/extensions/scratch3_gpt32scratch\" --entry=\"./scratch-gui/src/lib/libraries/extensions/gpt32scratch\" --gui=\"../\" --output=\"./dist\""
+    "build": "rimraf ./dist && mkdirp ./dist && npx xcratch-build --module=chatgpt2scratch --block=\"./scratch-vm/src/extensions/scratch3_chatgpt2scratch\" --entry=\"./scratch-gui/src/lib/libraries/extensions/chatgpt2scratch\" --gui=\"../\" --output=\"./dist\""
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/ichiroc/gpt32scratch.git"
+    "url": "git+ssh://git@github.com/ichiroc/chatgpt2scratch.git"
   },
   "author": "NAKATANI Ichiro",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ichiroc/gpt32scratch/issues"
+    "url": "https://github.com/ichiroc/chatgpt2scratch/issues"
   },
-  "homepage": "https://github.com/ichiroc/gpt32scratch#readme",
+  "homepage": "https://github.com/ichiroc/chatgpt2scratch#readme",
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/plugin-transform-react-jsx": "^7.10.4",

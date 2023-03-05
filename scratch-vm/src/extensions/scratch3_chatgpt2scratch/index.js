@@ -152,7 +152,11 @@ class Scratch3ChatGPTBlocks {
         if (this.apiKey === this.i18n.setApiKeyArgsDefaultValue || this.apiKey === '') {
             return this.i18n.answerFuncEnterOpenAIApiKey
         }
+
         const question = Cast.toString(args.TEXT);
+        if (question === this._lastQuestion) {
+            return this._lastAnswer
+        }
 
         const params = {
             method: 'POST',
@@ -173,7 +177,9 @@ class Scratch3ChatGPTBlocks {
         const completionPromise = fetchWithTimeout('https:api.openai.com/v1/chat/completions', params, 10000)
             .then(response => response.json()
             ).then(json => {
-                return (json.choices[0].message.content.replaceAll("\n", ''));
+                this._lastAnswer = json.choices[0].message.content.replaceAll("\n", '')
+                this._lastQuestion = question
+                return (this._lastAnswer)
             }).catch(error => {
                 log.warn(error);
                 return (`${this.i18n.answerFuncFailedToGetAnswer} | ${error}`);

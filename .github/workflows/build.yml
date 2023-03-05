@@ -2,6 +2,7 @@ name: Deploy ChatGPT2Scratch
 
 on:
   push:
+    branches: ["main"]
 
   workflow_dispatch:
 

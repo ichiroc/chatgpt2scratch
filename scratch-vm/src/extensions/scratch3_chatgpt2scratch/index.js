@@ -130,7 +130,7 @@ class Scratch3ChatGPTBlocks {
                 },
                 {
                     opcode: 'setMaxTokens',
-                    blockType: BlockType.REPORTER,
+                    blockType: BlockType.COMMAND,
                     text: this.i18n.setMaxTokensArgsText,
                     arguments: {
                         NUMBER: {

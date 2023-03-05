@@ -92,11 +92,7 @@ class Scratch3ChatGPTBlocks {
                     { "role": "system", "content": "You are a helpful assistant in the Scratch programming language." },
                     { "role": "user", "content": question },
                 ],
-                temperature: 0,
                 max_tokens: this.maxTokens,
-                top_p: 1,
-                frequency_penalty: 0,
-                presence_penalty: 0,
 
             })
         }

@@ -10228,7 +10228,7 @@ var Scratch3ChatGPTBlocks = /*#__PURE__*/function () {
           }
         }, {
           opcode: 'setMaxTokens',
-          blockType: BlockType.REPORTER,
+          blockType: BlockType.COMMAND,
           text: this.i18n.setMaxTokensArgsText,
           arguments: {
             NUMBER: {
@@ -10251,6 +10251,9 @@ var Scratch3ChatGPTBlocks = /*#__PURE__*/function () {
         return this.i18n.answerFuncEnterOpenAIApiKey;
       }
       var question = Cast.toString(args.TEXT);
+      if (question === this._lastQuestion) {
+        return this._lastAnswer;
+      }
       var params = {
         method: 'POST',
         headers: {
@@ -10272,7 +10275,9 @@ var Scratch3ChatGPTBlocks = /*#__PURE__*/function () {
       var completionPromise = fetchWithTimeout('https:api.openai.com/v1/chat/completions', params, 10000).then(function (response) {
         return response.json();
       }).then(function (json) {
-        return json.choices[0].message.content.replaceAll("\n", '');
+        _this._lastAnswer = json.choices[0].message.content.replaceAll("\n", '');
+        _this._lastQuestion = question;
+        return _this._lastAnswer;
       }).catch(function (error) {
         log.warn(error);
         return "".concat(_this.i18n.answerFuncFailedToGetAnswer, " | ").concat(error);

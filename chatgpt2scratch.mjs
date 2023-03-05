@@ -10272,7 +10272,7 @@ var Scratch3ChatGPTBlocks = /*#__PURE__*/function () {
           max_tokens: this.maxTokens
         })
       };
-      var completionPromise = fetchWithTimeout('https:api.openai.com/v1/chat/completions', params, 10000).then(function (response) {
+      var completionPromise = fetchWithTimeout('https://api.openai.com/v1/chat/completions', params, 10000).then(function (response) {
         return response.json();
       }).then(function (json) {
         _this._lastAnswer = json.choices[0].message.content.replaceAll("\n", '');

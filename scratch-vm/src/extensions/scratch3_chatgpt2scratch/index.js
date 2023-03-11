@@ -98,13 +98,15 @@ const I18n = {
  * @constructor
  */
 class Scratch3ChatGPTBlocks {
+    SESSION_STORAGE_KEY_CHATGPT_API_KEY = 'chatGptApiKey'
+
     constructor(runtime) {
         /**
          * The runtime instantiating this block package.
          * @type {Runtime}
          */
         this.runtime = runtime;
-        this.apiKey = '';
+        this.apiKey = window.sessionStorage.getItem(this.SESSION_STORAGE_KEY_CHATGPT_API_KEY) || '';
         this.maxTokens = 300;
         this.temperature = 1;
 
@@ -209,6 +211,7 @@ class Scratch3ChatGPTBlocks {
 
     setApiKey() {
         this.apiKey = window.prompt(this.i18n.setApiKeyFuncPromptText);
+        window.sessionStorage.setItem(this.SESSION_STORAGE_KEY_CHATGPT_API_KEY, this.apiKey);
     }
 
     setMaxTokens(args) {

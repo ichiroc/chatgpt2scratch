@@ -18,6 +18,7 @@ const blockIconURI = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYA
  * answerArgsDefaultValue: string,
  * answerFuncEnterOpenAIApiKey: string,
  * setMaxTokensArgsText: string,
+ * setTemperatureArgsText: string,
  * setApiKeyArgsText: string,
  * setApiKeyArgsDefaultValue: string,
  * setApiKeyFuncPromptText: string,
@@ -39,6 +40,8 @@ const I18n = {
             'Set max tokens [NUMBER]',
         setApiKeyArgsText:
             'Set API key',
+        setTemperatureArgsText:
+            'Set temperature [NUMBER]',
         setApiKeyArgsDefaultValue:
             'API key',
         setApiKeyFuncPromptText:
@@ -55,6 +58,8 @@ const I18n = {
             'openai.com のサイトからAPIキーを取得してセットください',
         setMaxTokensArgsText:
             '最大トークン数を設定[NUMBER]',
+        setTemperatureArgsText:
+            'temperature を設定[NUMBER]',
         setApiKeyArgsText:
             'APIキーをセット',
         setApiKeyArgsDefaultValue:
@@ -74,6 +79,8 @@ const I18n = {
             'オープンエーアイエーアイキーをにゅうりょくしてください',
         setMaxTokensArgsText:
             'さいだいトークンすうをせってい[NUMBER]',
+        setTemperatureArgsText:
+            'テンパラチュアをせってい[NUMBER]',
         setApiKeyArgsText:
             'エーピーアイキーをセット',
         setApiKeyArgsDefaultValue:
@@ -99,6 +106,7 @@ class Scratch3ChatGPTBlocks {
         this.runtime = runtime;
         this.apiKey = '';
         this.maxTokens = 300;
+        this.temperature = 1;
 
         const currentLocale = formatMessage.setup().locale;
         const availableLocales = ['en', 'ja', 'ja-Hira',];
@@ -140,6 +148,17 @@ class Scratch3ChatGPTBlocks {
                     }
                 },
                 {
+                    opcode: 'setTemperature',
+                    blockType: BlockType.COMMAND,
+                    text: this.i18n.setTemperatureArgsText,
+                    arguments: {
+                        NUMBER: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: 1
+                        }
+                    }
+                },
+                {
                     opcode: 'setApiKey',
                     blockType: BlockType.COMMAND,
                     text: this.i18n.setApiKeyArgsText,
@@ -171,7 +190,7 @@ class Scratch3ChatGPTBlocks {
                     { "role": "user", "content": question },
                 ],
                 max_tokens: this.maxTokens,
-
+                temperature: this.temperature,
             })
         }
         const completionPromise = fetchWithTimeout('https:api.openai.com/v1/chat/completions', params, 10000)
@@ -194,6 +213,10 @@ class Scratch3ChatGPTBlocks {
 
     setMaxTokens(args) {
         this.maxTokens = Number(args.NUMBER);
+    }
+
+    setTemperature(args) {
+        this.temperature = Number(args.NUMBER);
     }
 }
 

@@ -41,7 +41,7 @@ const I18n = {
         setApiKeyArgsText:
             'Set API key',
         setTemperatureArgsText:
-            'Set temperature [NUMBER]',
+            'Set temperature(0-2) [NUMBER]',
         setApiKeyArgsDefaultValue:
             'API key',
         setApiKeyFuncPromptText:
@@ -59,7 +59,7 @@ const I18n = {
         setMaxTokensArgsText:
             '最大トークン数を設定[NUMBER]',
         setTemperatureArgsText:
-            'temperature を設定[NUMBER]',
+            'temperature を設定(0-2) [NUMBER]',
         setApiKeyArgsText:
             'APIキーをセット',
         setApiKeyArgsDefaultValue:
@@ -80,7 +80,7 @@ const I18n = {
         setMaxTokensArgsText:
             'さいだいトークンすうをせってい[NUMBER]',
         setTemperatureArgsText:
-            'テンパラチュアをせってい[NUMBER]',
+            'テンパラチュアをせってい(0-2) [NUMBER]',
         setApiKeyArgsText:
             'エーピーアイキーをセット',
         setApiKeyArgsDefaultValue:

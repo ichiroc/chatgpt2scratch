@@ -42,6 +42,8 @@ const I18n = {
             'Set API key',
         setTemperatureArgsText:
             'Set temperature(0-2) [NUMBER]',
+        setTimeoutArgsText:
+            'Set timeout [NUMBER]',
         setApiKeyArgsDefaultValue:
             'API key',
         setApiKeyFuncPromptText:
@@ -60,6 +62,8 @@ const I18n = {
             '最大トークン数を設定[NUMBER]',
         setTemperatureArgsText:
             'temperature を設定(0-2) [NUMBER]',
+        setTimeoutArgsText:
+            'timeout をせってい [NUMBER]',
         setApiKeyArgsText:
             'APIキーをセット',
         setApiKeyArgsDefaultValue:
@@ -81,6 +85,8 @@ const I18n = {
             'さいだいトークンすうをせってい[NUMBER]',
         setTemperatureArgsText:
             'テンパラチュアをせってい(0-2) [NUMBER]',
+        setTimeoutArgsText:
+            'タイムアウトをせってい [NUMBER]',
         setApiKeyArgsText:
             'エーピーアイキーをセット',
         setApiKeyArgsDefaultValue:
@@ -109,6 +115,7 @@ class Scratch3ChatGPTBlocks {
         this.apiKey = window.sessionStorage.getItem(this.SESSION_STORAGE_KEY_CHATGPT_API_KEY) || '';
         this.maxTokens = 300;
         this.temperature = 1;
+        this.timeout = 10000;
 
         const currentLocale = formatMessage.setup().locale;
         const availableLocales = ['en', 'ja', 'ja-Hira',];
@@ -161,6 +168,17 @@ class Scratch3ChatGPTBlocks {
                     }
                 },
                 {
+                    opcode: 'setTimeout',
+                    blockType: BlockType.COMMAND,
+                    text: this.i18n.setTimeoutArgsText,
+                    arguments: {
+                        NUMBER: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: 10000
+                        }
+                    }
+                },
+                {
                     opcode: 'setApiKey',
                     blockType: BlockType.COMMAND,
                     text: this.i18n.setApiKeyArgsText,
@@ -195,10 +213,10 @@ class Scratch3ChatGPTBlocks {
                 temperature: this.temperature,
             })
         }
-        const completionPromise = fetchWithTimeout('https://api.openai.com/v1/chat/completions', params, 10000)
+        const completionPromise = fetchWithTimeout('https://api.openai.com/v1/chat/completions', params, this.timeout)
             .then(response => response.json()
             ).then(json => {
-                this._lastAnswer = json.choices[0].message.content.replaceAll("\n", '')
+                this._lastAnswer = json.choices[0].message.content
                 this._lastQuestion = question
                 return (this._lastAnswer)
             }).catch(error => {
@@ -220,6 +238,10 @@ class Scratch3ChatGPTBlocks {
 
     setTemperature(args) {
         this.temperature = Number(args.NUMBER);
+    }
+
+    setTimeout(args) {
+        this.timeout = Number(args.NUMBER);
     }
 }
 

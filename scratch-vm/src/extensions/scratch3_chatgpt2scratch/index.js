@@ -41,7 +41,7 @@ const I18n = {
         setApiKeyArgsText:
             'Set API key',
         setTemperatureArgsText:
-            'Set temperature(0-2) [NUMBER]',
+            'Set temperature (0-2) [NUMBER]',
         setTimeoutArgsText:
             'Set timeout [NUMBER]',
         setApiKeyArgsDefaultValue:
@@ -61,7 +61,7 @@ const I18n = {
         setMaxTokensArgsText:
             '最大トークン数を設定[NUMBER]',
         setTemperatureArgsText:
-            'temperature を設定(0-2) [NUMBER]',
+            'temperature を設定 (0-2) [NUMBER]',
         setTimeoutArgsText:
             'timeout をせってい [NUMBER]',
         setApiKeyArgsText:
@@ -84,7 +84,7 @@ const I18n = {
         setMaxTokensArgsText:
             'さいだいトークンすうをせってい[NUMBER]',
         setTemperatureArgsText:
-            'テンパラチュアをせってい(0-2) [NUMBER]',
+            'テンパラチュアをせってい (0-2) [NUMBER]',
         setTimeoutArgsText:
             'タイムアウトをせってい [NUMBER]',
         setApiKeyArgsText:

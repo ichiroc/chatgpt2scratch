@@ -63,7 +63,7 @@ const I18n = {
         setTemperatureArgsText:
             'temperature を設定 (0-2) [NUMBER]',
         setTimeoutArgsText:
-            'timeout をせってい [NUMBER]',
+            'timeout を設定 [NUMBER]',
         setApiKeyArgsText:
             'APIキーをセット',
         setApiKeyArgsDefaultValue:

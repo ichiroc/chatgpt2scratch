@@ -14,14 +14,14 @@ const blockIconURI = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYA
 
 /**
  * @typedef {{
- * answerArgsText: string,
- * answerArgsDefaultValue: string,
+ * answerBlockText: string,
+ * answerBlockDefaultValue: string,
  * answerFuncEnterOpenAIApiKey: string,
- * clearMessageLogsArgsText: string,
- * setMaxTokensArgsText: string,
- * setTemperatureArgsText: string,
- * setApiKeyArgsText: string,
- * setApiKeyArgsDefaultValue: string,
+ * clearMessageLogsBlockText: string,
+ * setMaxTokensBlockText: string,
+ * setTemperatureBlockText: string,
+ * setApiKeyBlockText: string,
+ * setApiKeyBlockDefaultValue: string,
  * setApiKeyFuncPromptText: string,
  * answerFuncFailedToGetAnswer: string }} I18nData
  */
@@ -31,23 +31,23 @@ const blockIconURI = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYA
  */
 const I18n = {
     'en': {
-        answerArgsText:
+        answerBlockText:
             '[TEXT] Answer',
-        answerArgsDefaultValue:
+        answerBlockDefaultValue:
             'How can I get better at Scratch?',
         answerFuncEnterOpenAIApiKey:
             'Enter the API key obtained from the openai.com site',
-        clearMessageLogsArgsText:
+        clearMessageLogsBlockText:
             'Clear message logs',
-        setMaxTokensArgsText:
+        setMaxTokensBlockText:
             'Set max tokens [NUMBER]',
-        setApiKeyArgsText:
+        setApiKeyBlockText:
             'Set API key',
-        setTemperatureArgsText:
+        setTemperatureBlockText:
             'Set temperature (0-2) [NUMBER]',
-        setTimeoutArgsText:
+        setTimeoutBlockText:
             'Set timeout [NUMBER]',
-        setApiKeyArgsDefaultValue:
+        setApiKeyBlockDefaultValue:
             'API key',
         setApiKeyFuncPromptText:
             'Enter the API key.',
@@ -55,23 +55,23 @@ const I18n = {
             'Failed to get answer',
     },
     'ja': {
-        answerArgsText:
+        answerBlockText:
             '[TEXT]の答え',
-        answerArgsDefaultValue:
+        answerBlockDefaultValue:
             'Scratch が上手くなるには?',
         answerFuncEnterOpenAIApiKey:
             'openai.com のサイトからAPIキーを取得してセットください',
-        clearMessageLogsArgsText:
+        clearMessageLogsBlockText:
             'メッセージログをクリア',
-        setMaxTokensArgsText:
+        setMaxTokensBlockText:
             '最大トークン数を設定[NUMBER]',
-        setTemperatureArgsText:
+        setTemperatureBlockText:
             'temperature を設定 (0-2) [NUMBER]',
-        setTimeoutArgsText:
+        setTimeoutBlockText:
             'timeout を設定 [NUMBER]',
-        setApiKeyArgsText:
+        setApiKeyBlockText:
             'APIキーをセット',
-        setApiKeyArgsDefaultValue:
+        setApiKeyBlockDefaultValue:
             'API キー',
         setApiKeyFuncPromptText:
             'APIキーを入力してください',
@@ -80,23 +80,23 @@ const I18n = {
 
     },
     'ja-Hira': {
-        answerArgsText:
+        answerBlockText:
             '[TEXT]のこたえ',
-        answerArgsDefaultValue:
+        answerBlockDefaultValue:
             'スクラッチがうまくなるには?',
         answerFuncEnterOpenAIApiKey:
             'オープンエーアイエーアイキーをにゅうりょくしてください',
-        clearMessageLogsArgsText:
+        clearMessageLogsBlockText:
             'メッセージログをクリア',
-        setMaxTokensArgsText:
+        setMaxTokensBlockText:
             'さいだいトークンすうをせってい[NUMBER]',
-        setTemperatureArgsText:
+        setTemperatureBlockText:
             'テンパラチュアをせってい (0-2) [NUMBER]',
-        setTimeoutArgsText:
+        setTimeoutBlockText:
             'タイムアウトをせってい [NUMBER]',
-        setApiKeyArgsText:
+        setApiKeyBlockText:
             'エーピーアイキーをセット',
-        setApiKeyArgsDefaultValue:
+        setApiKeyBlockDefaultValue:
             'エーピーアイキー',
         setApiKeyFuncPromptText:
             'エーピーアイキーをにゅうりょくしてください',
@@ -150,24 +150,24 @@ class Scratch3ChatGPTBlocks {
                 {
                     opcode: 'answer',
                     blockType: BlockType.REPORTER,
-                    text: this.i18n.answerArgsText,
+                    text: this.i18n.answerBlockText,
                     arguments: {
                         TEXT: {
                             type: ArgumentType.STRING,
-                            defaultValue: this.i18n.answerArgsDefaultValue,
+                            defaultValue: this.i18n.answerBlockDefaultValue,
                         }
                     }
                 },
                 {
                     opcode: 'clearMessageLogs',
                     blockType: BlockType.COMMAND,
-                    text: this.i18n.clearMessageLogsArgsText,
+                    text: this.i18n.clearMessageLogsBlockText,
 
                 },
                 {
                     opcode: 'setMaxTokens',
                     blockType: BlockType.COMMAND,
-                    text: this.i18n.setMaxTokensArgsText,
+                    text: this.i18n.setMaxTokensBlockText,
                     arguments: {
                         NUMBER: {
                             type: ArgumentType.NUMBER,
@@ -178,7 +178,7 @@ class Scratch3ChatGPTBlocks {
                 {
                     opcode: 'setTemperature',
                     blockType: BlockType.COMMAND,
-                    text: this.i18n.setTemperatureArgsText,
+                    text: this.i18n.setTemperatureBlockText,
                     arguments: {
                         NUMBER: {
                             type: ArgumentType.NUMBER,
@@ -189,7 +189,7 @@ class Scratch3ChatGPTBlocks {
                 {
                     opcode: 'setTimeout',
                     blockType: BlockType.COMMAND,
-                    text: this.i18n.setTimeoutArgsText,
+                    text: this.i18n.setTimeoutBlockText,
                     arguments: {
                         NUMBER: {
                             type: ArgumentType.NUMBER,
@@ -200,14 +200,14 @@ class Scratch3ChatGPTBlocks {
                 {
                     opcode: 'setApiKey',
                     blockType: BlockType.COMMAND,
-                    text: this.i18n.setApiKeyArgsText,
+                    text: this.i18n.setApiKeyBlockText,
                 },
             ],
         };
     }
 
     answer(args) {
-        if (this.apiKey === this.i18n.setApiKeyArgsDefaultValue || this.apiKey === '') {
+        if (this.apiKey === this.i18n.setApiKeyBlockDefaultValue || this.apiKey === '') {
             return this.i18n.answerFuncEnterOpenAIApiKey
         }
 

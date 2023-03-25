@@ -10,8 +10,8 @@ https://ichiroc.github.io/chatgpt2scratch/
 
 To use ChatGPT2Scratch:
 
-1. You need to obtain an API Key from the OpenAI website in advance.
-1. Open the official website.
+1. You need to obtain an API Key from the [OpenAI website](https://openai.com/) in advance.
+1. Open the [official website](https://ichiroc.github.io/chatgpt2scratch/).
 1. Open the "Choose an Extension" screen and select "ChatGPT2Scratch".
 1. Execute the "Set API Key" block first and set the API Key obtained from the OpenAI website.
 1. When you execute the "Get answer to ~" block, you can get a response from ChatGPT.
@@ -31,8 +31,6 @@ npm install
 2. Clone the chatgpt2scratch repository (this repository):
 
 Run the following commands in the scratch-gui directory.
-
-ディレクトリは scratch-gui のまま以下を実行します。
 
 ```sh
 git clone git@github.com:ichiroc/chatgpt2scratch.git

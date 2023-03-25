@@ -46,3 +46,7 @@ npm start
 ```
 
 You can access it at http://localhost:8601.
+
+## Release Notes
+
+https://github.com/ichiroc/chatgpt2scratch/releases

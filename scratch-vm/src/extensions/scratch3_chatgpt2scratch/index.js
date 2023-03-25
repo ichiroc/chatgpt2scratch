@@ -17,6 +17,7 @@ const blockIconURI = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYA
  * answerArgsText: string,
  * answerArgsDefaultValue: string,
  * answerFuncEnterOpenAIApiKey: string,
+ * clearMessageLogsArgsText: string,
  * setMaxTokensArgsText: string,
  * setTemperatureArgsText: string,
  * setApiKeyArgsText: string,
@@ -36,6 +37,8 @@ const I18n = {
             'How can I get better at Scratch?',
         answerFuncEnterOpenAIApiKey:
             'Enter the API key obtained from the openai.com site',
+        clearMessageLogsArgsText:
+            'Clear message logs',
         setMaxTokensArgsText:
             'Set max tokens [NUMBER]',
         setApiKeyArgsText:
@@ -58,6 +61,8 @@ const I18n = {
             'Scratch が上手くなるには?',
         answerFuncEnterOpenAIApiKey:
             'openai.com のサイトからAPIキーを取得してセットください',
+        clearMessageLogsArgsText:
+            'メッセージログをクリア',
         setMaxTokensArgsText:
             '最大トークン数を設定[NUMBER]',
         setTemperatureArgsText:
@@ -81,6 +86,8 @@ const I18n = {
             'スクラッチがうまくなるには?',
         answerFuncEnterOpenAIApiKey:
             'オープンエーアイエーアイキーをにゅうりょくしてください',
+        clearMessageLogsArgsText:
+            'メッセージログをクリア',
         setMaxTokensArgsText:
             'さいだいトークンすうをせってい[NUMBER]',
         setTemperatureArgsText:
@@ -116,13 +123,19 @@ class Scratch3ChatGPTBlocks {
         this.maxTokens = 300;
         this.temperature = 1;
         this.timeout = 10000;
-
+        this._initMessageLog();
         const currentLocale = formatMessage.setup().locale;
         const availableLocales = ['en', 'ja', 'ja-Hira',];
         /**
          * @type {I18nData}
          */
         this.i18n = I18n[availableLocales.includes(currentLocale) ? currentLocale : 'en'];
+    }
+
+    _initMessageLog() {
+        this.messageLogs = [
+            { "role": "system", "content": "You are a helpful assistant in the Scratch programming language." },
+        ];
     }
 
     /**
@@ -144,6 +157,12 @@ class Scratch3ChatGPTBlocks {
                             defaultValue: this.i18n.answerArgsDefaultValue,
                         }
                     }
+                },
+                {
+                    opcode: 'clearMessageLogs',
+                    blockType: BlockType.COMMAND,
+                    text: this.i18n.clearMessageLogsArgsText,
+
                 },
                 {
                     opcode: 'setMaxTokens',
@@ -182,7 +201,7 @@ class Scratch3ChatGPTBlocks {
                     opcode: 'setApiKey',
                     blockType: BlockType.COMMAND,
                     text: this.i18n.setApiKeyArgsText,
-                }
+                },
             ],
         };
     }
@@ -197,6 +216,7 @@ class Scratch3ChatGPTBlocks {
             return this._lastAnswer
         }
 
+        const questionMessageLog = { "role": "user", "content": question }
         const params = {
             method: 'POST',
             headers: {
@@ -206,8 +226,7 @@ class Scratch3ChatGPTBlocks {
             body: JSON.stringify({
                 model: "gpt-3.5-turbo",
                 messages: [
-                    { "role": "system", "content": "You are a helpful assistant in the Scratch programming language." },
-                    { "role": "user", "content": question },
+                    ...this.messageLogs, questionMessageLog
                 ],
                 max_tokens: this.maxTokens,
                 temperature: this.temperature,
@@ -218,6 +237,8 @@ class Scratch3ChatGPTBlocks {
             ).then(json => {
                 this._lastAnswer = json.choices[0].message.content
                 this._lastQuestion = question
+                this.messageLogs.push(questionMessageLog)
+                this.messageLogs.push({ role: "assistant", content: this._lastAnswer })
                 return (this._lastAnswer)
             }).catch(error => {
                 log.warn(error);
@@ -225,6 +246,12 @@ class Scratch3ChatGPTBlocks {
             });
 
         return completionPromise;
+    }
+
+    clearMessageLogs() {
+        this._lastAnswer = '';
+        this._lastQuestion = '';
+        this._initMessageLog();
     }
 
     setApiKey() {

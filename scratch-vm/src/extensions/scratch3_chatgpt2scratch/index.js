@@ -122,7 +122,7 @@ class Scratch3ChatGPTBlocks {
         this.apiKey = window.sessionStorage.getItem(this.SESSION_STORAGE_KEY_CHATGPT_API_KEY) || '';
         this.maxTokens = 300;
         this.temperature = 1;
-        this.timeout = 10000;
+        this.timeout = 30000;
         this._initMessageLog();
         const currentLocale = formatMessage.setup().locale;
         const availableLocales = ['en', 'ja', 'ja-Hira',];
@@ -171,7 +171,7 @@ class Scratch3ChatGPTBlocks {
                     arguments: {
                         NUMBER: {
                             type: ArgumentType.NUMBER,
-                            defaultValue: 300
+                            defaultValue: this.maxTokens
                         }
                     }
                 },
@@ -182,7 +182,7 @@ class Scratch3ChatGPTBlocks {
                     arguments: {
                         NUMBER: {
                             type: ArgumentType.NUMBER,
-                            defaultValue: 1
+                            defaultValue: this.temperature
                         }
                     }
                 },
@@ -193,7 +193,7 @@ class Scratch3ChatGPTBlocks {
                     arguments: {
                         NUMBER: {
                             type: ArgumentType.NUMBER,
-                            defaultValue: 10000
+                            defaultValue: this.timeout
                         }
                     }
                 },

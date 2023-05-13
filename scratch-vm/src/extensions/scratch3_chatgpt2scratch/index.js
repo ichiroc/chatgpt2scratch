@@ -235,6 +235,9 @@ class Scratch3ChatGPTBlocks {
         const completionPromise = fetchWithTimeout('https://api.openai.com/v1/chat/completions', params, this.timeout)
             .then(response => response.json()
             ).then(json => {
+                if(json.error !== undefined) {
+                    return `[${json.error.code}: ${json.error.type}] ${json.error.message}`
+                }
                 this._lastAnswer = json.choices[0].message.content
                 this._lastQuestion = question
                 this.messageLogs.push(questionMessageLog)

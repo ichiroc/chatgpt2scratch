@@ -16,6 +16,21 @@ To use ChatGPT2Scratch:
 1. Execute the "Set API Key" block first and set the API Key obtained from the OpenAI website.
 1. When you execute the "Get answer to ~" block, you can get a response from ChatGPT.
 
+## About API usage fees
+
+ChatGPT2Scratch uses the **gpt-3.5-turbo** model of OpenAI's API.
+
+There is a fee for using OpenAI's API.
+Each input and output string is broken down into units called tokens, and a fee is charged per token.
+
+For more information, please see the following page
+
+https://openai.com/pricing
+
+To find out how many tokens a given string will be, the following tool is useful.
+
+https://platform.openai.com/tokenizer
+
 ## For Developers
 
 To run the ChatGPT2Scratch extension on your computer, follow these steps:
@@ -44,21 +59,6 @@ npm start
 ```
 
 You can access it at http://localhost:8601.
-
-## About API usage fees
-
-ChatGPT2Scratch uses the **gpt-3.5-turbo** model of OpenAI's API.
-
-There is a fee for using OpenAI's API.
-Each input and output string is broken down into units called tokens, and a fee is charged per token.
-
-For more information, please see the following page
-
-https://openai.com/pricing
-
-To find out how many tokens a given string will be, the following tool is useful.
-
-https://platform.openai.com/tokenizer
 
 ## Release Notes
 

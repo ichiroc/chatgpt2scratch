@@ -14,6 +14,21 @@ https://ichiroc.github.io/chatgpt2scratch/
 4. 最初に「API キーをセット」ブロックを実行して、 OpenAI のサイトから取得した API キーをセットします
 5. 「〜〜の答え」のブロックを実行すると ChatGPT からの返答を取得することができます
 
+## API の利用料について
+
+ChatGPT2Scratch は OpenAI の API の **gpt-3.5-turbo** モデルを利用しています。
+
+OpenAI の API 利用には料金が発生します。
+入力と出力の文字列をそれぞれトークンと呼ばれる単位に分解して、トークンごとに費用が発生します。
+
+詳しくは次のページをご確認ください。
+
+https://openai.com/pricing
+
+ある文字列がどれくらいのトークン数となるのかを調べるには、次のツールが便利です。
+
+https://platform.openai.com/tokenizer
+
 ## 開発者向け
 
 自身のコンピュータでこの拡張を実行する方法を解説します。
@@ -42,21 +57,6 @@ npm start
 ```
 
 http://localhost:8601 を開けばアクセスできます
-
-## API の利用料について
-
-ChatGPT2Scratch は OpenAI の API の **gpt-3.5-turbo** モデルを利用しています。
-
-OpenAI の API 利用には料金が発生します。
-入力と出力の文字列をそれぞれトークンと呼ばれる単位に分解して、トークンごとに費用が発生します。
-
-詳しくは次のページをご確認ください。
-
-https://openai.com/pricing
-
-ある文字列がどれくらいのトークン数となるのかを調べるには、次のツールが便利です。
-
-https://platform.openai.com/tokenizer
 
 ## Release Notes
 

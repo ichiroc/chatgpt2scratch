@@ -43,6 +43,21 @@ npm start
 
 http://localhost:8601 を開けばアクセスできます
 
+## API の利用料について
+
+ChatGPT2Scratch は OpenAI の API の **gpt-3.5-turbo** モデルを利用しています。
+
+OpenAI の API 利用には料金が発生します。
+入力と出力の文字列をそれぞれトークンと呼ばれる単位に分解して、トークンごとに費用が発生します。
+
+詳しくは次のページをご確認ください。
+
+https://openai.com/pricing
+
+ある文字列がどれくらいのトークン数となるのかを調べるには、次のツールが便利です。
+
+https://platform.openai.com/tokenizer
+
 ## Release Notes
 
 https://github.com/ichiroc/chatgpt2scratch/releases

@@ -1,7 +1,7 @@
 const ArgumentType = require('../../extension-support/argument-type');
 const BlockType = require('../../extension-support/block-type');
 const Cast = require('../../util/cast');
-const fetchWithTimeout = require('../../util/fetch-with-timeout');
+const { fetchWithTimeout } = require('../../util/fetch-with-timeout');
 const log = require('../../util/log');
 const formatMessage = require('format-message');
 

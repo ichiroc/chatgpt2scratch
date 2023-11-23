@@ -8,7 +8,7 @@ https://ichiroc.github.io/chatgpt2scratch/
 
 ## 使い方
 
-1. 事前に [OpenAI](https://openai.com/) のサイトから API Key を取得する必要があります
+1. 事前に [OpenAI](https://openai.com/) のサイトから API Key を取得する必要があります。([APIキーの取得方法](APIKEY_SETUP.ja.md))
 2. [公式サイト](https://ichiroc.github.io/chatgpt2scratch/) を開きます
 3. 「拡張機能を選ぶ」画面を開き「ChatGPT2Scratch」を選びます
 4. 最初に「API キーをセット」ブロックを実行して、 OpenAI のサイトから取得した API キーをセットします

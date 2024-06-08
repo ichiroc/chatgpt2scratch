@@ -2,22 +2,22 @@
 
 1. [OpenAI](https://openai.com/)のサイトを開きます。
 
-![openai](images/openai.png)
+![chatgpt](images/openai.png)
 
-2. 右上メニューのLog inを選びます。
+2. サイトの一番下、フッターから「API Login」を選ぶと、ログイン画面が開きます。
 
-![login](images/login.png)
+![chatgpt](images/api-login.png)
+![chatgpt](images/login.png)
 
-3. Don't have and account? の右横、Sign upを選びます。メールアドレスと設定したいパスワードを入力して、Continueをクリックします。
+3. 「アカウントをお持ちではありませんか？」の横「サインアップ」リンクをクリックします。メールアドレスと設定したいパスワードを入力して、「続ける」をクリックします。
 
 ![signup](images/signup.png)
 
-4. Verify your emailという画面になります。3.で設定したメールアドレスに「OpenAI - Verify your email
-」というタイトルでメールが送られてくるはずなので、メール文中のVerify email addressのボタンをクリックします。
+4. 「メールを検証する」という画面になります。3.で設定したメールアドレスに「ChatGPT - メールアドレスの確認」というタイトルでメールが送られてくるなので、メール文中の「メールアドレスの確認」をクリックします。
 
 ![verify-email](images/verify-email.png)
 
-5. Tell us about youという画面が開くので、First NameとLast nameにそれぞれ、名前、名字を入力し、Birthdayの欄に生年月日を入力します。Terms(利用規約)とPrivacy Policy(プライバシーポリシー)に同意できれば、Agreeをクリックします。
+5. 「ご自身について教えてください」という画面が開くので、氏名と生年月日を入力します。規約とプライバシーポリシーに同意できれば、「同意する」をクリックします。
 
 ![onboarding](images/onboarding.png)
 
@@ -25,11 +25,11 @@
 
 ![start](images/start.png)
 
-7. 左上端のロゴにマウスカーソルを合わせ、開いたメニューよりAPI keysを選びます。
+7. 左メニューより「API keys」を選びます。
 
 ![apikeys](images/apikeys.png)
 
-8. APIキーを作成するには、電話番号の認証が必要です。Start verificationのボタンをクリックします。
+8. APIキーを作成するには、電話番号の認証が必要です。「Start verification」のボタンをクリックします。
 
 ![start-verification](images/start-verification.png)
 
@@ -41,7 +41,7 @@
 
 ![enter-code](images/enter-code.png)
 
-11. 電話番号が認証されるとsecret key(APIキー)を作成できるようになります。Create new secret keyボタンを押し、secret key(APIキー)の名前を入力します。複数のAPIキーを使うときに見分けがつくよう適切な名前をつけておきましょう。例えばChatGPT2Scratchと名付けます。
+11. 電話番号が認証されるとsecret key(APIキー)を作成できるようになります。Nameの欄には、複数のAPIキーを使うことになったときに区別がつくよう適切な名前をつけておきます。例えばChatGPT2Scratchと名付け、「Create secret key」をクリックします。
 
 ![key-name](images/key-name.png)
 

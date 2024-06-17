@@ -23,6 +23,7 @@ const blockIconURI = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYA
  * setApiKeyBlockText: string,
  * setApiKeyBlockDefaultValue: string,
  * setApiKeyFuncPromptText: string,
+ * setSystemPromptBlockText: string,
  * answerFuncFailedToGetAnswer: string }} I18nData
  */
 
@@ -51,6 +52,8 @@ const I18n = {
             'API key',
         setApiKeyFuncPromptText:
             'Enter the API key.',
+        setSystemPromptBlockText:
+            'Set the system prompt [TEXT]',
         answerFuncFailedToGetAnswer:
             'Failed to get answer',
     },
@@ -75,6 +78,8 @@ const I18n = {
             'API キー',
         setApiKeyFuncPromptText:
             'APIキーを入力してください',
+        setSystemPromptBlockText:
+            'システムプロンプトを設定 [TEXT]',
         answerFuncFailedToGetAnswer:
             '答えを取得できませんでした',
 
@@ -100,6 +105,8 @@ const I18n = {
             'エーピーアイキー',
         setApiKeyFuncPromptText:
             'エーピーアイキーをにゅうりょくしてください',
+        setSystemPromptBlockText:
+            'システムプロンプトをせってい [TEXT]',
         answerFuncFailedToGetAnswer:
             'こたえをしゅとくできませんでした'
     }
@@ -123,6 +130,7 @@ class Scratch3ChatGPTBlocks {
         this.maxTokens = 300;
         this.temperature = 1;
         this.timeout = 30000;
+        this.systemPrompt = 'You are a helpful assistant in the Scratch programming language.';
         this._initMessageLog();
         const currentLocale = formatMessage.setup().locale;
         const availableLocales = ['en', 'ja', 'ja-Hira',];
@@ -133,9 +141,15 @@ class Scratch3ChatGPTBlocks {
     }
 
     _initMessageLog() {
-        this.messageLogs = [
-            { "role": "system", "content": "You are a helpful assistant in the Scratch programming language." },
-        ];
+        this.messageLogs = [];
+    }
+
+    _getSystemPromptMessage() {
+        if(this.systemPrompt === '') {
+            return null;
+        } else {
+            return { "role": "system", "content": this.systemPrompt };
+        }
     }
 
     /**
@@ -198,10 +212,21 @@ class Scratch3ChatGPTBlocks {
                     }
                 },
                 {
+                    opcode: 'setSystemPrompt',
+                    blockType: BlockType.COMMAND,
+                    text: this.i18n.setSystemPromptBlockText,
+                    arguments: {
+                        TEXT: {
+                            type: ArgumentType.STRING,
+                            defaultValue: this.systemPrompt
+                        }
+                    }
+                },
+                {
                     opcode: 'setApiKey',
                     blockType: BlockType.COMMAND,
                     text: this.i18n.setApiKeyBlockText,
-                },
+                }
             ],
         };
     }
@@ -226,8 +251,8 @@ class Scratch3ChatGPTBlocks {
             body: JSON.stringify({
                 model: "gpt-3.5-turbo",
                 messages: [
-                    ...this.messageLogs, questionMessageLog
-                ],
+                    this._getSystemPromptMessage(),...this.messageLogs, questionMessageLog
+                ].filter( v => v !== null),
                 max_tokens: this.maxTokens,
                 temperature: this.temperature,
             })
@@ -272,6 +297,10 @@ class Scratch3ChatGPTBlocks {
 
     setTimeout(args) {
         this.timeout = Number(args.NUMBER);
+    }
+
+    setSystemPrompt(args) {
+        this.systemPrompt = Cast.toString(args.TEXT);
     }
 }
 

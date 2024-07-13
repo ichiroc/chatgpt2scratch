@@ -49,10 +49,8 @@
 
 ![secret-key](images/secret-key.png)
 
-13. 以上の手順でAPIキーを発行することができます。左メニューのSettings > Billingを選ぶと課金状況が表示されます。以下のようにFree trialに続けてCredit remainingで表示されていれば、そこに表示されている金額分だけ無料で使用することができます。
+13. 以上の手順でAPIキーを発行することができます。右上の歯車アイコン(Settings)のあとBillingを選ぶと利用残高が表示されます。表示されている金額分だけ使用することができます。
 
 ![credit](images/credit.png)
 
-14. View usageのボタンを押すと現在の使用状況がグラフで表示されます。もし、無料枠がなくなったあとも使い続けたい場合には、前の画面に戻り、Add payment detailsをクリックして、クレジットカードを登録することで使い続けることができます。
-
-![usage](images/usage.png)
+14. Payment methodsタブからクレジットカード情報を登録した上で、OverviewタブのAdd to credit balanceボタンを押すと残高を増やすことができます。

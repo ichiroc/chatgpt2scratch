@@ -18,7 +18,7 @@ To use ChatGPT2Scratch:
 
 ## About API usage fees
 
-ChatGPT2Scratch uses the **gpt-3.5-turbo** model of OpenAI's API.
+ChatGPT2Scratch uses the **gpt-4o-mini** model of OpenAI's API.
 
 There is a fee for using OpenAI's API.
 Each input and output string is broken down into units called tokens, and a fee is charged per token.

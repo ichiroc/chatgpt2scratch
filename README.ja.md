@@ -16,7 +16,7 @@ https://ichiroc.github.io/chatgpt2scratch/
 
 ## API の利用料について
 
-ChatGPT2Scratch は OpenAI の API の **gpt-3.5-turbo** モデルを利用しています。
+ChatGPT2Scratch は OpenAI の API の **gpt-4o-mini** モデルを利用しています。
 
 OpenAI の API 利用には料金が発生します。
 入力と出力の文字列をそれぞれトークンと呼ばれる単位に分解して、トークンごとに費用が発生します。

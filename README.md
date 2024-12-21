@@ -60,6 +60,10 @@ npm start
 
 You can access it at http://localhost:8601.
 
+## License
+
+ChatGPT2Scratch is licensed under AGPL 3.0. It is freely available for anyone to use and modify. However, if you make any modifications, you are required to share the source code.
+
 ## Release Notes
 
 https://github.com/ichiroc/chatgpt2scratch/releases

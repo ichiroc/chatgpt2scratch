@@ -58,6 +58,10 @@ npm start
 
 http://localhost:8601 を開けばアクセスできます
 
+## ライセンス
+
+ChatGPT2Scratch には AGPL 3.0 が適用されます。誰でも自由に利用、変更ができます。もし変更した場合はソースコードを共有する必要があります。
+
 ## Release Notes
 
 https://github.com/ichiroc/chatgpt2scratch/releases

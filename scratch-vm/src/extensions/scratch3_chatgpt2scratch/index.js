@@ -114,7 +114,7 @@ const I18n = {
 
 const comesFromCoderDojoJapan = (() => {
     const cacheKey = 'comesFromCoderDojoJapan';
-    const cacheValue = '!emoclew';
+    const cacheValue = process.env.DOJO_KEY;
     const comesFromCoderDojoJapanCache = localStorage.getItem(cacheKey);
     if(comesFromCoderDojoJapanCache === cacheValue) {
         return true

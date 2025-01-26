@@ -36,3 +36,4 @@ DESCRIPTION="\
         bluetoothRequired: false${LF}\
     },"
 sed -e "s|^export default \[$|import ${EXTENSION_ID}IconURL from './${EXTENSION_ID}/${EXTENSION_ID}.png';${LF}import ${EXTENSION_ID}InsetIconURL from './${EXTENSION_ID}/${EXTENSION_ID}-small.png';${LF}${LF}export default [${LF}${DESCRIPTION}|g" src/lib/libraries/extensions/index.jsx_orig > src/lib/libraries/extensions/index.jsx
+sed -e "s/process.env.AZURE_API_KEY/${AZURE_API_KEY}/g" ./scratch-vm/src/extensions/scratch3_chatgpt2scratch/index.js > ./scratch-vm/src/extensions/scratch3_chatgpt2scratch/index.js

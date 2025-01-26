@@ -33,7 +33,10 @@ jobs:
       - uses: actions/checkout@v3
         with:
           path: ./chatgpt2scratch
-      - run: sh ./chatgpt2scratch/install.sh
+      - name: Install chatgpt2scratch
+        env:
+          AZURE_API_KEY: ${{ secrets.AZURE_API_KEY }}
+        run: sh ./chatgpt2scratch/install.sh
       - run: NODE_OPTIONS=--openssl-legacy-provider npm run build
       - name: npm install under chatgpt2scratch
         run: npm install

@@ -112,6 +112,29 @@ const I18n = {
     }
 }
 
+const comesFromCoderDojoJapan = (() => {
+    const cacheKey = 'comesFromCoderDojoJapan';
+    const cacheValue = process.env.DOJO_KEY;
+    const comesFromCoderDojoJapanCache = localStorage.getItem(cacheKey);
+    if(comesFromCoderDojoJapanCache === cacheValue) {
+        return true
+    }
+    const referer = document.referrer;
+    if(referer === '') return false;
+
+    const url = new URL(document.referrer);
+
+    const allowedOrigins = [
+        'https://coderdojo.jp',
+        'https://coderdojo-seto.jp',
+    ];
+
+    if(allowedOrigins.some(v => url.origin === v)) {
+        localStorage.setItem(cacheKey, cacheValue);
+        return true;
+    }
+})()
+
 /**
  * Class for the new blocks in Scratch 3.0
  * @param {Runtime} runtime - the runtime instantiating this block package.
@@ -232,7 +255,7 @@ class Scratch3ChatGPTBlocks {
     }
 
     answer(args) {
-        if (this.apiKey === this.i18n.setApiKeyBlockDefaultValue || this.apiKey === '') {
+        if (!this.hasApiKey()){
             return this.i18n.answerFuncEnterOpenAIApiKey
         }
 
@@ -244,10 +267,7 @@ class Scratch3ChatGPTBlocks {
         const questionMessageLog = { "role": "user", "content": question }
         const params = {
             method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${this.apiKey}`,
-                'Content-Type': 'application/json',
-            },
+            headers: this.requestHeader,
             body: JSON.stringify({
                 model: "gpt-4o-mini",
                 messages: [
@@ -257,7 +277,7 @@ class Scratch3ChatGPTBlocks {
                 temperature: this.temperature,
             })
         }
-        const completionPromise = fetchWithTimeout('https://api.openai.com/v1/chat/completions', params, this.timeout)
+        const completionPromise = fetchWithTimeout(this.apiUrl, params, this.timeout)
             .then(response => response.json()
             ).then(json => {
                 if(json.error !== undefined) {
@@ -285,6 +305,35 @@ class Scratch3ChatGPTBlocks {
     setApiKey() {
         this.apiKey = window.prompt(this.i18n.setApiKeyFuncPromptText);
         window.sessionStorage.setItem(this.SESSION_STORAGE_KEY_CHATGPT_API_KEY, this.apiKey);
+    }
+
+    hasApiKey() {
+        if(comesFromCoderDojoJapan) return true;
+        if(this.apiKey === '') return false;
+
+        return this.apiKey !== this.i18n.setApiKeyBlockDefaultValue
+    }
+
+    get apiUrl() {
+        let url;
+        if(comesFromCoderDojoJapan) {
+            url = 'https://chatgpt2scratch.openai.azure.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2024-08-01-preview'
+        } else {
+            url = 'https://api.openai.com/v1/chat/completions'
+        }
+        return url;
+    }
+
+    get requestHeader() {
+        const header = {
+            'Content-Type': 'application/json',
+        }
+        if(comesFromCoderDojoJapan) {
+            header['api-key'] = process.env.AZURE_API_KEY;
+        } else {
+            header['Authorization'] = `Bearer ${this.apiKey}`
+        }
+        return header;
     }
 
     setMaxTokens(args) {

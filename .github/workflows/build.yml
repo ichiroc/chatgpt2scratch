@@ -36,6 +36,7 @@ jobs:
       - name: Install chatgpt2scratch
         env:
           AZURE_API_KEY: ${{ secrets.AZURE_API_KEY }}
+          DOJO_KEY: ${{ secrets.DOJO_KEY }}
         run: sh ./chatgpt2scratch/install.sh
       - run: NODE_OPTIONS=--openssl-legacy-provider npm run build
       - name: npm install under chatgpt2scratch

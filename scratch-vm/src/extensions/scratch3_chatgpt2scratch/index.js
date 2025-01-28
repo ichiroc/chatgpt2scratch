@@ -50,6 +50,8 @@ const I18n = {
             'Set timeout [NUMBER]',
         setApiKeyBlockDefaultValue:
             'API key',
+        setApiKeyFuncAzurePromptText:
+            'No API key required',
         setApiKeyFuncPromptText:
             'Enter the API key.',
         setSystemPromptBlockText:
@@ -76,6 +78,8 @@ const I18n = {
             'APIキーをセット',
         setApiKeyBlockDefaultValue:
             'API キー',
+        setApiKeyFuncAzurePromptText:
+            'APIキーは不要です',
         setApiKeyFuncPromptText:
             'APIキーを入力してください',
         setSystemPromptBlockText:
@@ -103,6 +107,8 @@ const I18n = {
             'エーピーアイキーをセット',
         setApiKeyBlockDefaultValue:
             'エーピーアイキー',
+        setApiKeyFuncAzurePromptText:
+            'APIキーはふようです',
         setApiKeyFuncPromptText:
             'エーピーアイキーをにゅうりょくしてください',
         setSystemPromptBlockText:
@@ -303,8 +309,12 @@ class Scratch3ChatGPTBlocks {
     }
 
     setApiKey() {
-        this.apiKey = window.prompt(this.i18n.setApiKeyFuncPromptText);
-        window.sessionStorage.setItem(this.SESSION_STORAGE_KEY_CHATGPT_API_KEY, this.apiKey);
+        if(comesFromCoderDojoJapan) {
+            alert(this.i18n.setApiKeyFuncAzurePromptText);
+        } else {
+            this.apiKey = window.prompt(this.i18n.setApiKeyFuncPromptText);
+            window.sessionStorage.setItem(this.SESSION_STORAGE_KEY_CHATGPT_API_KEY, this.apiKey);
+        }
     }
 
     hasApiKey() {

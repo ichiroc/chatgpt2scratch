@@ -133,6 +133,7 @@ const comesFromCoderDojoJapan = (() => {
     const allowedOrigins = [
         'https://coderdojo.jp',
         'https://coderdojo-seto.jp',
+        'https://stretch3.champierre.com',
     ];
 
     if(allowedOrigins.some(v => url.origin === v)) {
@@ -156,6 +157,7 @@ class Scratch3ChatGPTBlocks {
          */
         this.runtime = runtime;
         this.apiKey = window.sessionStorage.getItem(this.SESSION_STORAGE_KEY_CHATGPT_API_KEY) || '';
+        this.cloudflareWorkerApiUrl = process.env.CLOUDFLARE_WORKER_API_URL || '';
         this.maxTokens = 300;
         this.temperature = 1;
         this.timeout = 30000;
@@ -271,17 +273,20 @@ class Scratch3ChatGPTBlocks {
         }
 
         const questionMessageLog = { "role": "user", "content": question }
+        const requestBody = {
+            messages: [
+                this._getSystemPromptMessage(),...this.messageLogs, questionMessageLog
+            ].filter( v => v !== null),
+            max_tokens: this.maxTokens,
+            temperature: this.temperature,
+        }
+        if(!this.useCloudflareWorker) {
+            requestBody.model = "gpt-4o-mini";
+        }
         const params = {
             method: 'POST',
             headers: this.requestHeader,
-            body: JSON.stringify({
-                model: "gpt-4o-mini",
-                messages: [
-                    this._getSystemPromptMessage(),...this.messageLogs, questionMessageLog
-                ].filter( v => v !== null),
-                max_tokens: this.maxTokens,
-                temperature: this.temperature,
-            })
+            body: JSON.stringify(requestBody)
         }
         const completionPromise = fetchWithTimeout(this.apiUrl, params, this.timeout)
             .then(response => response.json()
@@ -319,19 +324,24 @@ class Scratch3ChatGPTBlocks {
 
     hasApiKey() {
         if(comesFromCoderDojoJapan) return true;
+        if(this.cloudflareWorkerApiUrl) return true;
         if(this.apiKey === '') return false;
 
         return this.apiKey !== this.i18n.setApiKeyBlockDefaultValue
     }
 
+    get useCloudflareWorker() {
+        return !comesFromCoderDojoJapan && this.apiKey === '' && this.cloudflareWorkerApiUrl !== '';
+    }
+
     get apiUrl() {
-        let url;
         if(comesFromCoderDojoJapan) {
-            url = 'https://chatgpt2scratch.openai.azure.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2024-08-01-preview'
-        } else {
-            url = 'https://api.openai.com/v1/chat/completions'
+            return 'https://chatgpt2scratch.openai.azure.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2024-08-01-preview'
         }
-        return url;
+        if(this.useCloudflareWorker) {
+            return this.cloudflareWorkerApiUrl
+        }
+        return 'https://api.openai.com/v1/chat/completions'
     }
 
     get requestHeader() {
@@ -340,7 +350,7 @@ class Scratch3ChatGPTBlocks {
         }
         if(comesFromCoderDojoJapan) {
             header['api-key'] = process.env.AZURE_API_KEY;
-        } else {
+        } else if(!this.useCloudflareWorker) {
             header['Authorization'] = `Bearer ${this.apiKey}`
         }
         return header;

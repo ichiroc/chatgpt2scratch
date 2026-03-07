@@ -1,0 +1,13 @@
+{
+  "name": "chatgpt2scratch-api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev --env dev",
+    "deploy": "wrangler deploy",
+    "deploy:dev": "wrangler deploy --env dev"
+  },
+  "devDependencies": {
+    "wrangler": "^4"
+  }
+}

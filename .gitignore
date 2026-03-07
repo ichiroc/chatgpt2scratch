@@ -2,3 +2,5 @@
 dist
 node_modules
 .dir-locals.el
+cloudflare-worker/.dev.vars
+.envrc

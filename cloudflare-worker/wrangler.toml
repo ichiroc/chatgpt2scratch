@@ -1,0 +1,13 @@
+name = "chatgpt2scratch-api"
+main = "src/index.js"
+compatibility_date = "2026-03-01"
+
+[vars]
+ALLOWED_ORIGINS = "https://ichiroc.github.io"
+OPEN_AI_MODEL = "gpt-4o-mini"
+
+[env.dev]
+name = "chatgpt2scratch-api-dev"
+[env.dev.vars]
+ALLOWED_ORIGINS = "http://localhost:8601,https://ichiroc.github.io"
+OPEN_AI_MODEL = "gpt-4o-mini"

@@ -9,6 +9,7 @@ EXTENSION_DESCRIPTION="ChatGPT for Scratch"
 
 sed -i -e "s/process.env.AZURE_API_KEY/\"${AZURE_API_KEY}\"/g" ${EXTENSION_ID}/scratch-vm/src/extensions/scratch3_${EXTENSION_ID}/index.js
 sed -i -e "s/process.env.DOJO_KEY/\"${DOJO_KEY}\"/g" ${EXTENSION_ID}/scratch-vm/src/extensions/scratch3_${EXTENSION_ID}/index.js
+sed -i -e "s|process.env.CLOUDFLARE_WORKER_API_URL|\"${CLOUDFLARE_WORKER_API_URL}\"|g" ${EXTENSION_ID}/scratch-vm/src/extensions/scratch3_${EXTENSION_ID}/index.js
 
 mkdir -p node_modules/scratch-vm/src/extensions/scratch3_${EXTENSION_ID}
 cp ${EXTENSION_ID}/scratch-vm/src/extensions/scratch3_${EXTENSION_ID}/index.js node_modules/scratch-vm/src/extensions/scratch3_${EXTENSION_ID}/
